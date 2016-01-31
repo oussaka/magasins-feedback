@@ -77,7 +77,7 @@ class EtablissementFilter implements InputFilterAwareInterface
 			$this->addTrimRequired($inputFilter, 'cp');
 			$this->addTrimRequired($inputFilter, 'ville');
 			$this->addTrimRequired($inputFilter, 'pays');
-			$this->addTrim($inputFilter, 'nb_lits');
+			$this->addTrim($inputFilter, 'nb_sellers');
 			$this->addTrimRequired($inputFilter, 'nomadmin');
 			$this->addTrimRequired($inputFilter, 'prenomadmin');
 			$this->addTrimRequired($inputFilter, 'sexeadmin');
@@ -117,7 +117,7 @@ class EtablissementFilter implements InputFilterAwareInterface
 			));
 			
 			$inputFilter->add(array(
-					'name' => 'nb_lits',
+					'name' => 'nb_sellers',
 					'validators' => array(
 							array('name' => 'Int'),
 							array('name' => 'GreaterThan', 'options' => array('min' => 0)),

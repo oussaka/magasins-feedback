@@ -22,7 +22,7 @@ class EtablissementForm extends Form
 		$this->setAttribute('method', 'post');
 
 
-		// Etablissement
+		// Magasin
 		$this->add(array(
 				'name' => 'id',
 				'type' => 'Hidden',
@@ -69,10 +69,10 @@ class EtablissementForm extends Form
 		));
 		
 		$this->add(array(
-				'name' => 'nb_lits',
+				'name' => 'nb_sellers',
 				'type' => 'Text',
 				'options' => array(
-						'label' => 'Nombre de lits',
+						'label' => 'Nombre de vendeurs',
 				),
 		));
 		
@@ -223,6 +223,4 @@ class EtablissementForm extends Form
 		//$this->setInputFilter(new EtablissementFilter());
 
 	}
-	
 }
-

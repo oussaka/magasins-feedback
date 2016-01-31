@@ -26,7 +26,7 @@ class EtablissementController extends AbstractActionController
 	{
 		$serviceManager = $this->getServiceLocator();
 		$entityManager  = $serviceManager->get(
-				'Doctrine\ORM\EntityManager'
+			'Doctrine\ORM\EntityManager'
 		);
 		return $entityManager;
 	}
@@ -59,20 +59,21 @@ class EtablissementController extends AbstractActionController
     }
 
     public function addAction()
-    {
-    	// error_reporting(E_ALL);
-    	$entityManager = $this->getEntityManager();
-    	$entityUsers = $entityManager->getRepository('\Indicateur\Entity\Users');
-    	$request = $this->getRequest();
-    	$form = new EtablissementForm($entityManager, 'ajout-etablissement', $this->getBaseUrl());
+	{
+		error_reporting(E_ALL);
+		$entityManager = $this->getEntityManager();
+		$entityUsers = $entityManager->getRepository('\Indicateur\Entity\Users');
+		$request = $this->getRequest();
+		$form = new EtablissementForm($entityManager, 'ajout-etablissement', $this->getBaseUrl());
 
-    	$alertmessages = array();
-    	$success = false;
+		$alertmessages = array();
+		$success = false;
 
-    	if ($request->isPost()) {
-    		$formInputFilter = new EtablissementFilter($entityManager);
+		if ($request->isPost()) {
+			$formInputFilter = new EtablissementFilter($entityManager);
     		$form->setInputFilter($formInputFilter->getInputFilter());
     		$form->setData($request->getPost());
+			var_dump($request->getPost());
     		
     		if($form->isValid()) {
     			// Applique le filtre et récupère les données filtrées
@@ -91,7 +92,7 @@ class EtablissementController extends AbstractActionController
 	    			$objEtabs->setEtVille($formData['ville']);
 	    			$objEtabs->setEtCp($formData['cp']);
 	    			$objEtabs->setEtPays($formData['pays']);
-	    			$objEtabs->setEtNbLits($formData['nb_lits']);
+	    			$objEtabs->setEtNbsellers($formData['nb_sellers']);
 	    			$objEtabs->setEtType(0);
 	    			$objEtabs->setCaCodeFk($entityManager->find('Indicateur\Entity\Categorie', $formData['categorie']));
 	    			$objEtabs->setEtStatut($entityManager->find('Indicateur\Entity\Etabstatut', $formData['statut']));
@@ -119,9 +120,9 @@ class EtablissementController extends AbstractActionController
 		    			if($objUsers->getUserCodePk() > 0) {
 		    				// Succès
 		    				$alertmessages['success'] = 'Etablissement crée';
-		    				$mailer = new Mailer();
-		    				$to = $entityUsers->getTabMailAdmin();
-		    				$mailer->envoiNotificationAjoutEtablissement($objEtabs, $objUsers, $to);
+		    				//$mailer = new Mailer();
+		    				//$to = $entityUsers->getTabMailAdmin();
+		    				//$mailer->envoiNotificationAjoutEtablissement($objEtabs, $objUsers, $to);
 		    				$success = true;
 		    			} else {
 		    				// Echec création superadmin
@@ -196,7 +197,7 @@ class EtablissementController extends AbstractActionController
 		    			$etab->setEtVille($formData['ville']);
 		    			$etab->setEtCp($formData['cp']);
 		    			$etab->setEtPays($formData['pays']);
-		    			$etab->setEtnblits($formData['nb_lits']);
+		    			$etab->setEtnbsellers($formData['nb_sellers']);
 		    			$etab->setCaCodeFk($entityCategorie->find($formData['categorie']));
 		    			$etab->setEtStatut($entityEtabstatut->find($formData['statut']));
 		    			$etab->setEtMaj(new \DateTime(date('Y-m-d H:i:s')));
@@ -208,13 +209,13 @@ class EtablissementController extends AbstractActionController
 		    		}
 		    	} else {
 		    		$form->populateValues(array(
-		    				'id'	=> 	$id,
+		    				'id'		=> $id,
 		    				'libelle'	=> $etab->getEtLibelle(),
 		    				'adresse'	=> $etab->getEtRue(),
 		    				'ville'		=> $etab->getEtVille(),
 		    				'cp'		=> $etab->getEtCp(),
 		    				'pays'		=> $etab->getEtPays(),
-		    				'nb_lits'	=> $etab->getEtNblits(),
+		    				'nb_sellers'=> $etab->getEtNbsellers(),
 		    				'categorie'	=> $etab->getCaCodeFk(),
 		    				'statut'	=> $etab->getEtStatut(),
 		    		));    		

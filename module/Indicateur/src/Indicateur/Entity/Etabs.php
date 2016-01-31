@@ -66,9 +66,9 @@ class Etabs
     /**
      * @var integer
      *
-     * @ORM\Column(name="et_nblits", type="smallint", nullable=true)
+     * @ORM\Column(name="et_nbsellers", type="smallint", nullable=true)
      */
-    private $etNblits;
+    private $etNbsellers;
 
     /**
      * @var integer
@@ -276,26 +276,26 @@ class Etabs
     }
 
     /**
-     * Set etNblits
+     * Set etNbsellers
      *
-     * @param integer $etNblits
+     * @param integer $etNbsellers
      * @return Etabs
      */
-    public function setEtNblits($etNblits)
+    public function setEtNbsellers($etNbsellers)
     {
-        $this->etNblits = $etNblits;
+        $this->etNbsellers = $etNbsellers;
     
         return $this;
     }
 
     /**
-     * Get etNblits
+     * Get etNbsellers
      *
      * @return integer 
      */
-    public function getEtNblits()
+    public function getEtNbsellers()
     {
-        return $this->etNblits;
+        return $this->etNbsellers;
     }
 
     /**
@@ -419,7 +419,7 @@ class Etabs
      * @param \Indicateur\Entity\Categorie $caCodeFk
      * @return Etabs
      */
-    public function setCaCodeFk(\Indicateur\Entity\Categorie $caCodeFk = null)
+    public function setCaCodeFk(Categorie $caCodeFk = null)
     {
         $this->caCodeFk = $caCodeFk;
     
@@ -442,7 +442,7 @@ class Etabs
      * @param \Indicateur\Entity\Etabstatut $etStatut
      * @return Etabs
      */
-    public function setEtStatut(\Indicateur\Entity\Etabstatut $etStatut = null)
+    public function setEtStatut(Etabstatut $etStatut = null)
     {
         $this->etStatut = $etStatut;
     

@@ -2,12 +2,16 @@
 html {height:100%;margin-bottom:1px;}
 body {background:transparent;border:0;font: Helvetica, Arial, sans-serif;color: #474747; background-color: #f0f0f0;}
 #header { height:110px;background:white}
-#header h1 {Color:green;font-size:x-large;}
+#header h1 {color:green;font-size:x-large;}
+#footer {color:green;align-content: center}
 #logo {width:367px;height:78px}
 #main-content {margin:0; background:#ffffff;  padding: 10px; -moz-border-radius: 3px 3px 3px 3px;}
 #footer {background:transparent;height:10px; font-size:11px; padding-top:5px; float:left; width:100%; height:100%;color:gray}
-.title {Color:green;font-size:x-large}
-#header .title {padding-left:15px;}
+#header .title {
+	font-size: x-large;
+	color: #001f3f;
+	padding-left: 150px;
+}
 .moduletablelogin {
     padding:0;
     margin:15px;
@@ -85,6 +89,84 @@ div.menu {padding-left:5px;}
 #nav li li:hover ul, #nav li li li:hover ul, #nav li li li li:hover ul, #nav li li.sfHover ul, #nav li li li.sfHover ul, #nav li li li li.sfHover ul {left:0;} 
 #nav li li li {z-index:10;width:480px;}
 
+/*** Formulaire standard ***/
+form.standard_form {
+	padding-left: 48px;
+}
+form.standard_form label span {
+	width: 200px;
+	display: block;
+	text-align: left;
+}
+form.standard_form input, form.standard_form select {
+	width: 300px;
+	height: 26px;
+}
+/*** Formulaire recherche ***/
+form.recherche_form {
+	padding-left: 48px;
+}
+form.recherche_form label span {
+	width: 100px;
+	display:inline-block;
+	text-align: right;
+	padding-right:10px;
+}
+form.recherche_form input, form.recherche_form select {
+	height: 26px;
+}
+
+.label_sub_form {
+	font-size: 20px;
+	font-weight: bold;
+	color: #101010;
+}
+form.standard_form ul {
+	background-color: #f2dede;
+	margin-top : -15px;
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	width: 300px;
+}
+form.standard_form ul li {
+	color:red;
+	list-style:none;
+}
+form.standard_form input.input-error {
+	border: 2px solid #a94442;
+}
+form.standard_form p.captcha {
+	padding-top: 10px;
+	padding-bottom: 20px;
+	height:200px;
+}
+form.standard_form p.captcha label,
+form.standard_form p.captcha img,
+form.standard_form p.captcha input
+{
+	float:left;
+	clear: both;
+}
+/*** Tableau standard ***/
+table.standard_table thead tr th {
+	background-color: #008000;
+	color: white;
+	font-size: 13px;
+}
+/* Nécessaire pour l'export PDF */
+table.standard_table thead tr th {
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+table.standard_table tbody tr td {
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+table.standard_table{
+	border-collapse: collapse;
+}
 
 span.pdf_titre {
     font-size: 20px;

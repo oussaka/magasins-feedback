@@ -16,6 +16,7 @@ data/sessions/
 data/tmp/
 data/db/
 temp/
+public/img/captcha/
 
 ### Bower ###
 bower_components
