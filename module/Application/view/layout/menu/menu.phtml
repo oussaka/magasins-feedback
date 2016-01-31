@@ -1,0 +1,19 @@
+<ul class="nav navbar-nav">
+	<li><a href="<?php echo $this->url("home"); ?>"><?php echo $this->translate("home"); ?></a></li>
+	
+	<?php 
+		if($connectedUser) {
+			if($connectedUser->type == 1) {
+				@include __DIR__ . '/superadmin.phtml';
+			} elseif($connectedUser->type == 2) {
+				@include __DIR__ . '/adminetab.phtml';			
+			} elseif($connectedUser->type == 3) {
+				@include __DIR__ . '/adminpui.phtml';
+			} elseif($connectedUser->type == 4) {
+				@include __DIR__ . '/commercant.phtml';
+			}
+		} else {
+			@include __DIR__ . '/invite.phtml';	
+		}
+	?>
+</ul>

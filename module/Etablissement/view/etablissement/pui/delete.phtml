@@ -1,0 +1,11 @@
+<?php 
+	if($pui) {
+		$complement_titre = $pui->getEtabs()->getEtLibelle() . '\\' . $pui->getLibelle();
+	} else {
+		$complement_titre = null;
+	}
+	echo $this->titrepage_helper('Supprimer une PUI', $complement_titre, $this->basepath() . '/etablissement/pui/list');
+?>
+
+	
+<?php echo $this->alertmessages_helper($alertmessages); ?>

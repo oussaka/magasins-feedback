@@ -1,0 +1,74 @@
+<?php 
+	$complement_titre = ($user) ? ($user->getNom() . ' ' . $user->getPrenom() . ' (' . $user->getLogin() . ')') : '';
+	if($connectedUser->type == '1' || $connectedUser->type == '2' || $connectedUser->type == '3') {
+		$retour = $this->basepath() . '/utilisateur/utilisateur/list';
+	} else {
+		$retour = null;
+	}
+	echo $this->titrepage_helper('Modification utilisateur', $complement_titre, $retour);
+?>
+
+<?php echo $this->alertmessages_helper($alertmessages); ?>
+
+
+<?php if($form): ?>
+	<?php echo $this->form()->openTag($form); ?>	
+		<div class="row">
+			<div class="col-md-5">
+				<p class="label_sub_form">Données personnelles</p>
+				<?php echo $this->formHidden($form->get('userCodePk')); ?>
+				<p><?php echo $this->formRow($form->get('nom')); ?></p>
+				<p><?php echo $this->formRow($form->get('prenom')); ?></p>
+				<p><?php echo $this->formRow($form->get('sexe')); ?></p>
+				<p><?php echo $this->formRow($form->get('mail')); ?></p>
+			</div>
+				
+			<div class="col-md-7">
+				<p class="label_sub_form">Connexion</p>
+				<p><?php echo $this->formRow($form->get('login')); ?></p>
+				<p><?php echo $this->formRow($form->get('pwd1')); ?></p>
+				<p><?php echo $this->formRow($form->get('pwd2')); ?></p>
+				
+				<br>
+			
+				<p class="label_sub_form">Profil</p>
+				<?php if($form->has('type')): ?>
+					<p><?php echo $this->formRow($form->get('type')); ?></p>
+				<?php endif; ?>
+				<p><?php echo $this->formRow($form->get('statut')); ?></p>
+				
+				<p><?php echo $this->formSubmit($form->get('submit')); ?></p>
+			</div>
+		</div>
+		
+		
+		<script language="javascript">
+			function deleteUser(id)
+			{
+				var url = '<?php echo $this->basepath(); ?>/utilisateur/utilisateur/delete/' + id;
+				if(confirm('Etes vous sûr de vouloir supprimer définitivement cet utilisateur?')) {
+					document.location = url;
+				}
+			}		
+		</script>
+		
+	<?php echo $this->form()->closeTag(); ?>
+	
+	<?php if($userpermission->canChangeUserPui($user)): ?>
+		<p style="text-align: left; padding-left: 50px;">
+			<input type="button" class="btn btn-info w300" value="Changement de PUI"
+				onClick="document.location='<?php echo $this->basepath(); ?>/utilisateur/utilisateur/invitation?mail=<?php echo $user->getEmail(); ?>';">
+		</p>
+	<?php endif; ?>
+	
+	<?php if($userpermission->canDeleteUser($user)): ?>
+		<p style="text-align: left; padding-left: 50px;">
+			<input type="button" class="btn btn-danger w300" value="Supprimer définitivement cet utilisateur" 
+				onClick="deleteUser(<?php echo $user->getUserCodePk(); ?>);">
+		</p>
+	<?php endif; ?>
+<?php endif;?>
+	
+	
+	
+

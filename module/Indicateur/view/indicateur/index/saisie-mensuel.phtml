@@ -1,0 +1,91 @@
+<?php
+$this->headTitle()->append("Mensuelle");
+?>
+<br />
+
+<!-- Content Header (Page header) -->
+<?php echo $this->titrepage_helper('Attribution de score', 'mensuelle');  ?>
+
+<div ng-app="scoremensuel">
+    <div class="container-fluid" ng-init='dataScores=<?php echo $this->formdata; ?>'></div>
+    <div class="container-fluid" ng-init='indicId=<?php echo $this->indic->getId(); ?>'></div>
+
+    <div class="row" style="margin-left: 8px;">
+        <h2><?php echo $indic->getTitre() ?><small><?php echo $indic->getTache() ?></small></h2>
+    </div>
+    <?php if($this->manyuser) { ?>
+        <div class="alert alert-info" role="alert">
+            <a href="#">Plusieurs utilisateurs sont attribués à cet indicateur</a>
+        </div>
+    <?php } ?>
+
+    <div class="row" ng-controller="scoreMensuel">
+        <div class="col-xs-12 col-md-6">
+            <!-- FORM -->
+            <!-- pass in the variable if our form is valid or invalid -->
+            <form role="form" method="post" name="scoreForm" ng-submit="submitForm(scoreForm)" novalidate> <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-fw fa-sort-amount-desc"> </i>Liste des saisies par mois</h3>
+                        <div class="box-tools">
+                            <div class="input-group">
+                            </div>
+                        </div>
+                    </div><!-- /.box-header -->
+                    <div class="box-body no-padding">
+                        <table class="table table-hover table-striped table-condensed">
+                            <tfoot style="background-color: #777777;">
+                            <tr>
+                                <th rowspan="1" colspan="1">{{currentYear}}</th>
+                                <th rowspan="1" colspan="1">Cumul</th>
+                                <th rowspan="1" colspan="1"><span class="badge bg-green">{{dataScores | filter:{annee : currentYear} | sumByKey:'valeur'}}</span></th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            <tr>
+                                <th class="">Année</th>
+                                <th class="">Mois</th>
+                                <th>Valeur</th>
+                            </tr>
+                            <tr ng- ng-repeat="score in dataScores | orderBy:'mois' | filter:{annee : currentYear}">
+                                <td>{{score.annee}}</td>
+                                <td ng-model="month">{{score.mois | monthLabel}}</td>
+                                <td>
+                                    <ng-form name="scoreFieldForm">
+                                        <div class="" ng-class="{ 'has-error' : scoreFieldForm.$invalid }">
+                                            <input type="hidden" name="annee" value="{{score.id}}"/>
+                                            <input class="form-control"
+                                                   type="text" name="valeur" ng-model="score.valeur"
+                                                   placeholder="" ng-pattern="/^\d+$/"/>
+                                            <p class="help-block" ng-show="scoreFieldForm.valeur.$invalid">La valeur doit être numerique.</p>
+                                        </div>
+                                    </ng-form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div><!-- /.box-body -->
+                    <div class="box-footer clearfix">
+                        <ul class="pager">
+                            <li ng-class="{disabled: currentYear == actualYear - 4}"><a href="" ng-click="prevPage()">&larr; Précédent</a></li>
+                            <li ng-class="{disabled: currentYear == actualYear}"><a href="" ng-click="nextPage($event)">Suivant &rarr;</a></li>
+                        </ul>
+                        <button class="btn btn-primary" type="submit" ng-disabled="scoreForm.$invalid || process">Enregistrer</button>
+                        <img id="spinner" ng-src="<?php echo $this->basePath(); ?>/img/spiffygif.gif" style="display: none;">
+                    </div><!-- /.box-footer -->
+                </div><!-- /.box -->
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script src="../bower_components/angular/angular.js" type="text/javascript"></script>
+<script src="../bower_components/angular-resource/angular-resource.js"></script>
+<script src="../bower_components/angular-animate/angular-animate.js"></script>
+<script src="../js/app.js" type="text/javascript"></script>
+<script src="../js/controllers/scoreMensuel.js" type="text/javascript"></script>
+<script src="../js/services/Scores.js" type="text/javascript"></script>
+<script src="../js/services/myHttpInterceptor.js" type="text/javascript"></script>
+<script src="../js/filters/sumByKey.js" type="text/javascript"></script>
+<script src="../js/filters/monthLabel.js" type="text/javascript"></script>

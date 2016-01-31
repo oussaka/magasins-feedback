@@ -1,0 +1,49 @@
+<?php echo $this->titrepage_helper('Ajouter un magasin'); ?>
+
+<?php echo $this->alertmessages_helper($alertmessages); ?>
+
+<?php if($success): ?>
+	<script language="javascript">
+		alert('<?php echo $this->escapejs($alertmessages['success']); ?>');
+		document.location = document.location.toString();
+	</script>
+<?php endif; ?>
+
+
+<?php echo $this->form()->openTag($form); ?>
+<table border="0">
+	<tr>
+		<td valign="top">
+			<p class="label_sub_form">Magasin</p>
+			<?php echo $this->formHidden($form->get('id')); ?>
+			<p><?php echo $this->formRow($form->get('libelle')); ?></p>
+			<p><?php echo $this->formRow($form->get('adresse')); ?></p>
+			<p><?php echo $this->formRow($form->get('ville')); ?></p>
+			<p><?php echo $this->formRow($form->get('cp')); ?></p>
+			<p><?php echo $this->formRow($form->get('pays')); ?></p>
+			<p><?php echo $this->formRow($form->get('nb_lits')); ?></p>
+			<p><?php echo $this->formRow($form->get('categorie')); ?></p>
+			<p><?php echo $this->formRow($form->get('statut')); ?></p>
+		</td>
+		<td width="48">&nbsp;</td>
+		<td valign="top">
+			<p class="label_sub_form">Compte administrateur magasin</p>
+			<?php echo $this->formHidden($form->get('idadmin')); ?>
+			<p><?php echo $this->formRow($form->get('nomadmin')); ?></p>
+			<p><?php echo $this->formRow($form->get('prenomadmin')); ?></p>
+			<p><?php echo $this->formRow($form->get('sexeadmin')); ?></p>
+			<p><?php echo $this->formRow($form->get('mailadmin')); ?></p>
+			<p><?php echo $this->formRow($form->get('loginadmin')); ?></p>
+			<p><?php echo $this->formRow($form->get('pwd1admin')); ?></p>
+			<p><?php echo $this->formRow($form->get('pwd2admin')); ?></p>
+			<p class="captcha"><?php echo $this->formRow($form->get('captcha')); ?></p>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" align="center"><?php echo $this->formSubmit($form->get('submit')); ?></td>
+	</tr>
+			
+</table>
+<?php echo $this->form()->closeTag(); ?>
+
+

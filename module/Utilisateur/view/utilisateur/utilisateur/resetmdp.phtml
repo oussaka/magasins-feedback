@@ -1,0 +1,27 @@
+<?php echo $this->titrepage_helper('Réinitialisation mot de passe'); ?>
+
+<?php echo $this->alertmessages_helper($alertmessages); ?>
+
+<?php if($user): ?>
+	<form method="post" class="standard__form">
+		<p>
+			<label>
+				<span>Nom d'utilisateur</span>
+				<input type="text" disabled name="login" value="<?php echo $this->escapehtml($user->getLogin()); ?>">
+			</label>
+		</p>
+		<p>
+			<label>
+				<span>Nouveau mot de passe</span>
+				<input type="password" name="mdp">
+			</label>
+		</p><p>
+			<label>
+				<span>Confirmer le mot de passe</span>
+				<input type="password" name="confirm_mdp">
+			</label>
+		</p>
+		
+		<input type="submit" value="Réinitialiser mon mot de passe">
+	</form>
+<?php endif; ?>

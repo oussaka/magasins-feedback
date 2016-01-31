@@ -1,0 +1,14 @@
+<?php echo $this->titrepage_helper('Mot de passe oublié'); ?>
+
+<?php echo $this->alertmessages_helper($alertmessages); ?>
+
+<form method="post" class="standard__form">
+	<p>
+		<label>
+			<span>Login ou email</span>
+			<input type="text" name="loginormail">
+		</label>
+	</p>
+	
+	<input type="submit" value="Réinitialiser mon mot de passe">
+</form>

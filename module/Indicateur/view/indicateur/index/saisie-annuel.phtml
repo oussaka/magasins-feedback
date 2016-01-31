@@ -1,0 +1,84 @@
+<?php
+    $this->headTitle()->append("Annuelle");
+?>
+<br />
+<div class="alert alert-danger alert-dismissable hidden">
+    <i class="fa fa-ban"></i>
+    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+    <b>Alert!</b> Danger alert preview. This alert is dismissable. A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.
+</div>
+
+<!-- Content Header (Page header) -->
+<?php echo $this->titrepage_helper('Attribution de score', 'annuelle');  ?>
+
+<!-- Main content -->
+<section class="content" ng-app="scoreannuel" ng-controller="formvalidation">
+
+    <div class="row" style="margin-left: 8px;">
+        <h2><?php echo $indic->getTitre() ?><small><?php echo $indic->getTache() ?></small></h2>
+    </div>
+    <?php if($this->manyuser) { ?>
+            <div class="alert alert-info" role="alert">
+                <a href="#">Plusieurs utilisateurs sont attribués à cet indicateur</a>
+            </div>
+    <?php } ?>
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+
+            <form role="form" method="post" action="<?php echo $this->url('saisiescore',  array("indicId" => $indic->getId())); ?>">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-fw fa-sort-amount-desc"> </i>Liste des saisies par année</h3>
+                        <div class="box-tools">
+                            <div class="input-group">
+                            </div>
+                        </div>
+                    </div><!-- /.box-header -->
+                    <div class="box-body no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <th class="">Année</th>
+                                <th>Valeur</th>
+                            </tr>
+                            <?php foreach ($formdata as $current)  { ?>
+                            <tr>
+                                <td><?php echo $current["annee"] ?></td>
+                                <td>
+                                    <input type="hidden" name="id[]" value="<?php echo $current["id"] ?>"/>
+                                    <input type="hidden" name="annee[]" value="<?php echo $current["annee"] ?>"/>
+                                    <input type="text" name="valeur[]" value="<?php echo $current["valeur"] ?>"
+                                           placeholder="" class="form-control" required>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                    </div><!-- /.box-body -->
+                    <div class="box-footer">
+                        <button class="btn btn-primary" type="submit">Enregistrer</button>
+                    </div><!-- /.box-footer -->
+                </div><!-- /.box -->
+            </form>
+        </div>
+    </div>
+    <hr/>
+
+</section><!-- /.content -->
+
+<script src="../bower_components/angular/angular.js" type="text/javascript"></script>
+<!--<script src="../js/app.js" type="text/javascript"></script>-->
+<script type="application/javascript">
+  angular.module('scoreannuel', []).
+      controller('formvalidation', ['$scope', function ($scope) {
+
+
+          $scope.valeur = [];
+          $scope.validateForm = function(form){
+              console.log(form);
+              console.log(form.$valid);
+          };
+
+      }]);
+
+</script>

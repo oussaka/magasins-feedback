@@ -1,0 +1,37 @@
+<div class="btn-group btn-toggle hidden">
+   <!-- <button class="btn btn-default" ng-click="filter(true)" ng-model="filtered">ON</button>
+    <button class="btn btn-primary active" ng-click="filter(false)" ng-model="filtered">OFF</button>-->
+    <input type="checkbox" name="Filter" id="filtler" ng-model="filtered"/>
+</div>
+
+<!--<h1>{{filtered}}</h1>
+<h1>{{UsersIndic.length}}</h1>-->
+
+<table class="table header-fixed table-hover">
+    <tbody>
+    <tr>
+        <th>Pui</th>
+        <th class="col-md-1">Id</th>
+        <th>Nom</th>
+        <th class="col-md-1">Prénom</th>
+        <th class="col-md-1 text-center">Sexe</th>
+        <th>Login</th>
+        <th>Email</th>
+        <th>Date création</th>
+        <th class="col-md-1 text-center">Status</th>
+    </tr>
+    <tr ng-class="(user.indic.actif) ? 'success' : 'is-grey-true'" ng-repeat="user in UsersIndic | filter:{ indic.actif: filtered}">
+        <td>{{user.pui}}</td>
+        <td>{{user.userCodePk}}</td>
+        <td>{{user.nom}}</td>
+        <td>{{user.prenom}}</td>
+        <td>{{user.sexe}}</td>
+        <td>{{user.login}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.dateCreated.date}}</td>
+        <td class="vert-align">
+            <span class="label pointer" ng-click="toggleActif(user)" ng-class="(user.indic.actif) ? 'label-success' : 'label-danger'">{{user.indic.actif && "Attribué" || "Non attribué"}}</span>
+        </td>
+    </tr>
+    </tbody>
+</table>

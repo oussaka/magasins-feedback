@@ -1,0 +1,18 @@
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<?php echo $this->alertmessages_helper($alertmessages); ?>
+
+<div style="width:500px;margin:auto;">
+	<?php echo $this->form()->openTag($form); ?>
+		<p><?php echo $this->formRow($form->get('loginutilisateur')); ?></p>
+		<p><?php echo $this->formRow($form->get('passwordutilisateur')); ?></p>
+		<?php echo $this->formSubmit($form->get('submit')); ?>
+	<?php echo $this->form()->closeTag(); ?>
+	
+	<p>&nbsp;</p>
+	<p style="text-align: left;"><a href="<?php echo $this->basepath();  ?>/utilisateur/utilisateur/oublimdp">Mot de passe oublié ?</a></p>
+</div>
+
+<p>&nbsp;</p>

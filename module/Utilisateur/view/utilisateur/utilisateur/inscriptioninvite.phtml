@@ -1,0 +1,21 @@
+<?php echo $this->titrepage_helper('Inscription'); ?>
+
+<?php echo $this->alertmessages_helper($alertmessages); ?>
+
+
+<?php if($form): ?>
+	<?php echo $this->form()->openTag($form); ?>
+
+		<p><?php echo $this->formRow($form->get('nom')); ?></p>
+		<p><?php echo $this->formRow($form->get('prenom')); ?></p>
+		<p><?php echo $this->formRow($form->get('sexe')); ?></p>
+		<p><?php echo $this->formRow($form->get('mail')); ?></p>
+		<p><?php echo $this->formRow($form->get('login')); ?></p>
+		<p><?php echo $this->formRow($form->get('pwd1')); ?></p>
+		<p><?php echo $this->formRow($form->get('pwd2')); ?></p>
+		
+		<?php echo $this->formSubmit($form->get('submit')); ?>
+				
+	<?php echo $this->form()->closeTag(); ?>
+<?php endif;?>
+	

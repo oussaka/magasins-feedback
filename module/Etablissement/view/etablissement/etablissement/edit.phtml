@@ -1,0 +1,22 @@
+<?php echo $this->titrepage_helper('Modification établissement', $form->get('libelle')->getValue()); ?>
+
+<?php echo $this->alertmessages_helper($alertmessages); ?>
+
+
+<?php echo $this->form()->openTag($form); ?>
+
+	<?php echo $this->formHidden($form->get('id')); ?>
+	<p><?php echo $this->formRow($form->get('libelle')); ?></p>
+	<p><?php echo $this->formRow($form->get('adresse')); ?></p>
+	<p><?php echo $this->formRow($form->get('ville')); ?></p>
+	<p><?php echo $this->formRow($form->get('cp')); ?></p>
+	<p><?php echo $this->formRow($form->get('pays')); ?></p>
+	<p><?php echo $this->formRow($form->get('nb_lits')); ?></p>
+	<p><?php echo $this->formRow($form->get('categorie')); ?></p>
+	<p><?php echo $this->formRow($form->get('statut')); ?></p>
+	
+	<?php echo $this->formSubmit($form->get('submit')); ?>
+			
+<?php echo $this->form()->closeTag(); ?>
+
+

@@ -1,0 +1,31 @@
+<?php 
+	echo $this->titrepage_helper(
+		'Ajouter une PUI', 
+		(($etab) ? ('Etablissement : ' . $this->escapehtml($etab->getEtLibelle())) : ''),
+		$this->basepath() . '/etablissement/pui/list'
+	); 
+?>
+
+<?php echo $this->alertmessages_helper($alertmessages); ?>
+
+<?php if(isset($success) && $success): ?>
+	<script language="javascript">
+		alert('<?php echo $this->escapejs($alertmessages['success']); ?>');
+		document.location = document.location.toString();
+	</script>
+<?php endif; ?>
+
+
+<?php if($form): ?>
+	<?php echo $this->form()->openTag($form); ?>	
+		
+		<?php echo $this->formHidden($form->get('id')); ?>
+		<?php echo $this->formHidden($form->get('etab_id')); ?>
+		
+		<p><?php echo $this->formRow($form->get('libelle')); ?></p>
+		<p><?php echo $this->formRow($form->get('nblits')); ?></p>
+		<p><?php echo $this->formSubmit($form->get('submit')); ?></p>
+	
+	<?php echo $this->form()->closeTag(); ?>
+<?php endif; ?>
+

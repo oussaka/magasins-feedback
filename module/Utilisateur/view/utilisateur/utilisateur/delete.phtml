@@ -1,0 +1,13 @@
+<?php echo 
+	$this->titrepage_helper('Suppression utilisateur'); 
+?>
+
+<?php echo $this->alertmessages_helper($alertmessages); ?>
+
+
+<?php if($succes): ?>
+	<script language="javascript">
+		alert('Utilisateur supprimé');
+		document.location = '<?php echo $this->basepath(); ?>/utilisateur/utilisateur/list';
+	</script>
+<?php endif; ?>

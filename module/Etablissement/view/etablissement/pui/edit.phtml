@@ -1,0 +1,62 @@
+<?php 
+	use My\AuthUserPermissions;
+if($etab && $pui) {
+		$complement_titre = 
+			$this->escapehtml($etab->getEtLibelle()) . ' \ ' .
+			$this->escapehtml($pui->getLibelle());
+	} else {
+		$complement_titre = '';
+	}
+	if($connectedUser->type == AuthUserPermissions::ADMIN_ETABS || $connectedUser->type == AuthUserPermissions::SUPERADMIN) {
+		$retour = $this->basepath() . '/etablissement/pui/list';
+	} else {
+		$retour = null;
+	}
+
+	echo $this->titrepage_helper('Modifier une PUI', $complement_titre, $retour); 
+?>
+
+<?php if($canDelete): ?>
+	<div style="padding-right: 50px;">
+		<input type="button" class="btn btn-danger pull-right" value="Supprimer cette PUI" onClick="delete_current_pui();">
+	</div>
+	<div class="clearfix"></div>
+<?php endif; ?>
+
+
+<?php echo $this->alertmessages_helper($alertmessages); ?>
+
+
+<?php if(isset($success) && $success): ?>
+	<script language="javascript">
+		alert('<?php echo $this->escapejs($alertmessages['success']); ?>');
+		document.location = document.location.toString();
+	</script>
+<?php endif; ?>
+
+
+<?php if($pui): ?>
+	<?php if($form): ?>
+		<?php echo $this->form()->openTag($form); ?>	
+			
+			<?php echo $this->formHidden($form->get('id')); ?>
+			<?php echo $this->formHidden($form->get('etab_id')); ?>
+			
+			<p><?php echo $this->formRow($form->get('libelle')); ?></p>
+			<p><?php echo $this->formRow($form->get('nblits')); ?></p>
+			<p><?php echo $this->formSubmit($form->get('submit')); ?></p>
+		
+		<?php echo $this->form()->closeTag(); ?>
+	<?php endif; ?>
+
+	<?php if($canDelete): ?>
+		<script language="javascript">
+			function delete_current_pui()
+			{
+				if(confirm('Cette  action est irréversible. Etes vous sûr de vouloir supprimer définitivement cette PUI ?')) {
+					document.location = '<?php echo $this->basepath(); ?>/etablissement/pui/delete/<?php echo $pui->getPuicodePk(); ?>';
+				}
+			}
+		</script>
+	<?php endif; ?>
+<?php endif; ?>

@@ -1,0 +1,50 @@
+<?php if ($this->pageCount): ?>
+
+  <div class="text-center">
+    <ul class="pagination">
+        <!-- First page link -->
+        <li>
+            <a href="<?php echo $this->url($this->route, array('page' => $this->first, 'id' => $this->id, 'search_by' => $this->search_by)); ?>">
+                <i class="glyphicon glyphicon-backward"></i>
+            </a>
+        </li>
+    
+        <!-- Previous page link -->
+        <li>
+            <a href="<?php echo $this->url($this->route, array('page' => $this->previous, 'id' => $this->id, 'search_by' => $this->search_by)); ?>">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+            </a>
+        </li>
+
+        <!-- Numbered page links -->
+        <?php foreach ($this->pagesInRange as $page): ?>
+            <?php if ($page != $this->current): ?>
+                <li><a href="<?php echo $this->url($this->route, array('page' => $page, 'id' => $this->id, 'search_by' => $search_by)); ?>"><?php echo $page; ?></a></li>
+            <?php else: ?>
+                <li class="active"><a href="#"><?php echo $page; ?></a></li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <!-- Next page link -->
+        <?php if (isset($this->next)): ?>
+            <li>
+                <a href="<?php echo $this->url($this->route, array('page' => $this->next, 'id' => $this->id, "search_by" => $search_by)); ?>">
+                    <i class="glyphicon glyphicon-chevron-right"></i>
+                </a>
+            </li>
+        <?php else: ?>
+            <li><a href="#" class="disabled"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+        <?php endif; ?>
+        
+        <!-- Last Page -->
+        <li>
+            <a href="<?php echo $this->url($this->route, array('page' => $this->last, 'search_by' => $this->search_by)); ?>">
+                <i class="glyphicon glyphicon-forward"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+<?php endif; ?>
+<div class="alert alert-info" role="alert">
+  <strong><?php echo $this->totalItemCount; ?></strong> indicateurs - page <strong><?php echo $this->current;?> / <?php echo $this->last;?></strong>
+</div>

@@ -1,0 +1,38 @@
+{
+    "name": "oussaka/magasins-indicateurs",
+    "description": "indicateur description",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "oussa ka",
+            "email": "oussaka@github.com",
+            "role": "Developer"
+        }
+    ],
+    "keywords": [
+        "framework",
+        "zf2"
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "2.2.*",
+        "doctrine/doctrine-orm-module": "0.*",
+        "hounddog/doctrine-data-fixture-module": "dev-master",
+        "gedmo/doctrine-extensions": "2.3.*",
+        "monolog/monolog": "1.11.*@dev",
+        "sebastian/phpcpd": "2.0.*@dev",
+        "pdepend/pdepend" : "dev-master",
+        "ruflin/elastica": "0.20.5.*@dev",
+        "remithomas/rt-headtitle": "dev-master",
+		"phpexcel/phpexcel": "dev-master",
+		"ensepar/html2pdf": "dev-master"
+    },
+    "require-dev": {
+        "zendframework/zftool": "dev-master",
+        "zendframework/zend-developer-tools": "dev-master",
+        "phploc/phploc": "dev-master",
+        "bjyoungblood/bjy-profiler": "dev-master",
+        "codeception/codeception": "*"
+    }
+}

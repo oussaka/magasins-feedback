@@ -1,0 +1,100 @@
+<!-- Content Header (Page header) -->
+<?php echo $this->titrepage_helper('Mes indicateurs');  ?>
+
+<!-- Main content -->
+<section class="content">
+    <!-- filter form -->
+    <div class="row">
+        <div class="col-lg-8 col-sm-4">
+        </div>
+        <div class="col-lg-4 col-sm-8"></div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Chapitre</th>
+            <th>Type</th>
+            <th>Domaine d’activité</th>
+            <th>Qualification</th>
+            <th>Indicateur</th>
+            <th>Priorité</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php  /** @var $indics \Indicateur\Entity\Indicateur[] */ ?>
+        <?php foreach($this->indics as $indic): ?>
+            <tr>
+                <td><?php echo $indic->getIndicateur()->getChapitre()->getTitre() ?></td>
+                <td><?php echo $indic->getIndicateur()->getType() ?></td>
+                <td><?php echo $indic->getIndicateur()->getDomaine()->getTitle() ?></td>
+                <td><?php echo $indic->getIndicateur()->getQualification()->getTitle() ?></td>
+                <td><?php echo $indic->getIndicateur()->getTitre() ?></td>
+                <td><?php echo $indic->getIndicateur()->getPriorite()->getTitle() ?></td>
+                <td class="info vert-align">
+                    <button class="btn btn-primary btn-xs btn-detail" data-indicateurid="<?php echo $indic->getId() ?>"><i class="glyphicon glyphicon-chevron-up"></i> Detail</button>
+                    <hr />
+                    <a class="btn btn-primary btn-xs" href="<?php echo $this->url("saisiescore", array("indicId" => $indic->getIndicateur()->getId())) ?>"><i class="glyphicon glyphicon-edit"></i> Attribuer score</a>
+                </td>
+                <td class="hidden" id="tache-<?php echo $indic->getId() ?>"><?php echo  $indic->getIndicateur()->getTache() ?></td>
+                <td class="hidden" id="incluy-<?php echo $indic->getId() ?>"><?php echo $indic->getIndicateur()->getInclutY() ?></td>
+                <td class="hidden" id="inclun-<?php echo $indic->getId() ?>"><?php echo $indic->getIndicateur()->getInclutN() ?></td>
+                <td class="hidden" id="commnt-<?php echo $indic->getId() ?>"><?php echo $indic->getIndicateur()->getCommentaire() ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php  echo $this->paginationControl($this->paginator, 'Sliding', 'paginator'); ?>
+
+</section><!-- /.content -->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                <h4 class="modal-title" id="myModalLabel">Détail indicateur</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <strong>Tâche</strong>
+                <div id="md-tache" class="text-justify"></div>
+                </p>
+                <p>
+                    <strong>Ce qu'il inclut</strong>
+                <div id="md-incluy" class="text-justify"></div>
+                </p>
+                <p>
+                    <strong>Ce qu'il n'inclut pas</strong>
+                <div id="md-inclun" class="text-justify"></div>
+                </p>
+                <p>
+                    <strong>Commentaire</strong>
+                <div id="md-commnt" class="text-justify"></div>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // function($){
+    $(".btn-detail").click(function(){
+        var location = $(this).data("indicateurid");
+        // console.log($(this).attr("data-indicateurid"));
+        $("#md-tache").html($("#tache-"+location).html());
+        $("#md-incluy").html($("#incluy-"+location).html());
+        $("#md-inclun").html($("#inclun-"+location).html());
+        $("#md-commnt").html($("#commnt-"+location).html());
+        $('#myModal').modal('show')
+    });
+
+    $('#myModal').on('hidden.bs.modal', function (e) {
+        $(".textfill").html("");
+    })
+    // }(jQuery);
+</script>
